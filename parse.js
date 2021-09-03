@@ -22,7 +22,7 @@ const fs = require("fs");
   // Output occurences
   await fs.writeFileSync(
     "./output/occurences.json",
-    JSON.stringify(rarityIndex, ',')
+    JSON.stringify(rarityIndex, null, 2)
   );
 
   // Calculate occurence scores

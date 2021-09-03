@@ -22,7 +22,7 @@ const fs = require("fs");
   // Output occurences
   await fs.writeFileSync(
     "./output/occurences.json",
-    JSON.stringify(rarityIndex)
+    JSON.stringify(rarityIndex, ',')
   );
 
   // Calculate occurence scores
@@ -32,7 +32,7 @@ const fs = require("fs");
     const attributes = loot[i][(i + 1).toString()];
 
     for (const attribute of Object.values(attributes)) {
-      score += rarityIndex[attribute];
+      score += Math.log2(rarityIndex[attribute]);
     }
     scores.push({ lootId: i + 1, score });
   }
@@ -46,5 +46,5 @@ const fs = require("fs");
   }));
 
   // Print loot rarity
-  await fs.writeFileSync("./output/rare.json", JSON.stringify(scores));
+  await fs.writeFileSync("./output/rare.json", JSON.stringify(scores, null, 2));
 })();
